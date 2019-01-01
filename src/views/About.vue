@@ -18,10 +18,10 @@
     <div>TEST123</div>
 
     <div class="d-table"></div>
-    <div class="d-flex justify-content-end align-content-center">
-      <div class="bg-red">RED</div>
-      <div class="bg-green">GREEN <br> TEA</div>
-      <div class="bg-blue">BLUE</div>
+    <div class="d-flex align-content-center">
+      <div class="bg-red flex-1">RED</div>
+      <div class="bg-green flex-1">GREEN <br> TEA</div>
+      <div class="bg-blue flex-1">BLUE</div>
     </div>
 
   </div>
@@ -34,6 +34,7 @@
 // });
 
 import { Bar, CountDown } from "@/components/Common.vue";
+import { Toast } from 'mint-ui';
 // var ComponentA = new Vue({
 //   template: "<div>HERE</div>"
 // })
@@ -47,7 +48,14 @@ export default {
   components: {
     Bar,
     ComponentA,
-    CountDown
+    CountDown,
+    Toast
+  },
+  mounted() {
+    setTimeout(function(){
+      Toast('Upload Complete');
+    }, 2000);
+    
   }
 }
 

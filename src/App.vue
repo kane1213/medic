@@ -31,6 +31,12 @@
 </style>
 
 <style lang="sass">
+
+  div.ceras
+    background-color: #00ff00
+    width: 100px
+    height: 150px
+
   $column-slug: col !default
   $container-size: 576 768 992 1200
   $distance: p m
@@ -56,7 +62,6 @@
   
 
   body
-    background-color: #eee
     .container
       width: 100%
       padding-right: 15px

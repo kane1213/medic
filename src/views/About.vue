@@ -1,6 +1,9 @@
 <template>
   <div class="about container">
     <h1>This is an about page</h1>
+
+     <mt-button type="primary" @click.stop="$router.push('user')"> 选择操作 </mt-button>
+
     <bar></bar>
     <div class="row my-5 py-5">
       <div class="col-4">
@@ -23,6 +26,8 @@
       <div class="bg-green flex-1">GREEN <br> TEA</div>
       <div class="bg-blue flex-1">BLUE</div>
     </div>
+    <div>Form</div>
+    <form-ipt></form-ipt>
 
   </div>
 </template>

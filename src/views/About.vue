@@ -1,5 +1,11 @@
 <template>
   <div class="about container">
+    <mt-header fixed title="fixed top">
+      <router-link to="/" slot="left">
+        <mt-button icon="back">back</mt-button>
+      </router-link>
+      <mt-button icon="more" slot="right"></mt-button>
+    </mt-header>
     <h1>This is an about page</h1>
 
      <mt-button type="primary" @click.stop="$router.push('user')"> 选择操作 </mt-button>
@@ -39,7 +45,7 @@
 // });
 
 import { Bar, CountDown } from "@/components/Common.vue";
-import { Toast } from 'mint-ui';
+import { Toast, Header } from 'mint-ui';
 // var ComponentA = new Vue({
 //   template: "<div>HERE</div>"
 // })
@@ -54,7 +60,8 @@ export default {
     Bar,
     ComponentA,
     CountDown,
-    Toast
+    Toast,
+    Header
   },
   mounted() {
     setTimeout(function(){

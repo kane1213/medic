@@ -7,7 +7,7 @@
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
     <h1>This is an about page</h1>
-
+    <h2>MASTER</h2>
      <mt-button type="primary" @click.stop="$router.push('user')"> 选择操作 </mt-button>
 
     <bar></bar>

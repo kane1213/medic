@@ -2,7 +2,7 @@
   <div class="user">
       <h2>User</h2>
       <router-view></router-view>
-      <div>HolidayMaster</div>
+      <div>HolidayTwice</div>
     </div>
 </template>
 

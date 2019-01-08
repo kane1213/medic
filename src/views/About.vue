@@ -7,7 +7,25 @@
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
     <h1>This is an about page</h1>
-    <h2>MASTER</h2>
+    <h2 class="shiftx-enter-active">MASTER</h2>
+    <div style="height: 32px;">
+    <transition name="shiftx"
+      v-on:enter="enter"
+      v-on:leave="leave"
+     >
+      <h2 v-if="bound">
+        <font >MASTER</font>
+      </h2>
+    </transition>
+    </div>
+    <button @click="show = !show">Click Me!</button>
+    <transition>
+      <!-- <div class="block" v-if="show">Block 1</div>
+      <p class="block" v-else>Block 2</p> -->
+      <h3 class="block" v-if="show" key="holiday">HOLIDAY</h3>
+      <h3 class="block" v-else key="master">MASTER</h3>
+    </transition>
+    
      <mt-button type="primary" @click.stop="$router.push('user')"> 选择操作 </mt-button>
 
     <bar></bar>
@@ -56,6 +74,17 @@ var ComponentA = {
 
 export default {
   name: "about",
+  data() {
+    return {
+      show: false,
+      animationInfinite: {
+        classes: 'fadeIn',
+        duration: 5000,
+        iteration: 'infinite'
+      },
+      bound: false
+    }
+  },
   components: {
     Bar,
     ComponentA,
@@ -63,9 +92,33 @@ export default {
     Toast,
     Header
   },
+  methods: {
+    beforeAppear: function(el) {
+      console.log('beforeAppear')
+    },
+    appear: function(el) {
+      console.log('appear!')
+    },
+    afterAppear: function(el) {
+      console.log('afterAppear!');
+    },
+    beforeEnter(el) {
+
+    },
+    enter(el) {
+      setTimeout(()=> this.bound = false, 3000)
+    },
+    leave(el) {
+      setTimeout(()=> this.bound = true, 1000)
+    }
+
+  },
   mounted() {
+    var _this = this;
     setTimeout(function(){
       Toast('Upload Complete');
+      _this.show = true;
+      _this.bound = true;
     }, 2000);
     
   }
@@ -73,3 +126,108 @@ export default {
 
 </script>
 
+<style lang="scss">
+
+  .shiftx-enter-active {
+    animation: bounce-in-top 2s infinite;
+  }
+  .shiftx-leave-active {
+    animation: goUp 0.25s;
+  }
+
+  
+  @keyframes bounce-in-top {
+  0% {
+    transform: translateY(-150%);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(-40%);        
+    animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  72% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  81% {
+    transform: translateY(-20.5%);        
+    animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  95% {
+    transform: translateY(-5%);        
+    animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+}
+
+  @keyframes goUp {
+    0% { 
+      transform: translateY(0%);
+      animation-timing-function: ease-in;
+      opacity: 1;
+    }
+    
+    100% { 
+      transform: translateY(-150%);
+      animation-timing-function: ease-in;
+      opacity: 0;
+    }
+    
+  }
+
+  @keyframes go {
+    0% { 
+      transform: scale(2, 2);
+      opacity: 0; 
+    }
+    50% { 
+      transform: scale(1, 1);
+      opacity: 1;
+    }
+    100% { 
+      transform: scale(2, 2);
+      opacity: 0;
+    }
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
+  .block {
+    background: #999;
+    color: #fff;
+    display: table-cell;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .v-leave { opacity: 1; }
+  .v-leave-active { transition: opacity 2s }
+  .v-leave-to { opacity: 0; }
+  .v-enter { opacity: 0; }
+  .v-enter-active  { transition: opacity 2s }
+  .v-enter-to { opacity: 1; }
+
+</style>

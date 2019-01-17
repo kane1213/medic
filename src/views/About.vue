@@ -1,5 +1,5 @@
 <template>
-  <div class="about container">
+  <div class="about container px-5 mb-5">
     <mt-header fixed title="fixed top">
       <router-link to="/" slot="left">
         <mt-button icon="back">back</mt-button>
@@ -52,6 +52,18 @@
     </div>
     <div>Form</div>
     <form-ipt></form-ipt>
+    <div class="p-1 bg-green mt-5">
+      <div class="p-2 bg-blue text-white" draggable='true' @dragstart='drag($event)'>DRAG</div>
+    </div>
+
+    <div class="p-1 bg-red" @drop='drop($event)' @dragover='allowDrop($event)'>
+
+    </div>
+
+    
+    <h1>Vue Select - Using v-model</h1>
+    <v-select v-model="selected" :options="options"></v-select>  
+
 
   </div>
 </template>
@@ -62,8 +74,11 @@
 //   template: `<div>HERE</div>`
 // });
 
+
+
 import { Bar, CountDown } from "@/components/Common.vue";
 import { Toast, Header } from 'mint-ui';
+import { getDoubles, getTrible } from '../assets/js/med';
 // var ComponentA = new Vue({
 //   template: "<div>HERE</div>"
 // })
@@ -82,7 +97,14 @@ export default {
         duration: 5000,
         iteration: 'infinite'
       },
-      bound: false
+      bound: false,
+      tmpEl: null,
+      options: [      
+        {id: 1, label: 'foo'},
+        {id: 3, label: 'bar'},
+        {id: 2, label: 'baz'},
+      ],
+      selected: {id: 3, label: 'bar'},
     }
   },
   components: {
@@ -110,7 +132,21 @@ export default {
     },
     leave(el) {
       setTimeout(()=> this.bound = true, 1000)
-    }
+    },
+    drag(event) {
+      //console.log(event);
+      this.tmpEl = event.currentTarget;
+    },
+    drop:function(event){
+      event.preventDefault();
+      event.target.appendChild(this.tmpEl);
+      //this.tmpEl = null;
+    },
+    allowDrop:function(event){
+      event.target.appendChild(this.tmpEl);
+      event.preventDefault();
+      
+    },
 
   },
   mounted() {
@@ -120,7 +156,7 @@ export default {
       _this.show = true;
       _this.bound = true;
     }, 2000);
-    
+
   }
 }
 
@@ -170,6 +206,11 @@ export default {
   95% {
     transform: translateY(-5%);        
     animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  99% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
     opacity: 1;
   }
   100% {

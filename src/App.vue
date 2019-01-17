@@ -96,13 +96,13 @@
 
     @for $i from 0 through 5
       @each $t in $distance
-        .#{$t}t-#{$i}, .#{$t}y-#{$i}
+        .#{$t}t-#{$i}, .#{$t}y-#{$i}, .#{$t}-#{$i}
           #{if($t==m, margin, padding)}-top: $i * $gap
-        .#{$t}b-#{$i}, .#{$t}y-#{$i}
+        .#{$t}b-#{$i}, .#{$t}y-#{$i}, .#{$t}-#{$i}
           #{if($t==m, margin, padding)}-bottom: $i * $gap
-        .#{$t}r-#{$i}, .#{$t}x-#{$i}
+        .#{$t}r-#{$i}, .#{$t}x-#{$i}, .#{$t}-#{$i}
           #{if($t==m, margin, padding)}-right: $i * $gap
-        .#{$t}-#{$i}, .#{$t}x-#{$i}
+        .#{$t}-#{$i}, .#{$t}x-#{$i}, .#{$t}-#{$i}
           #{if($t==m, margin, padding)}-left: $i * $gap
 
     @each $cs in $container-size
@@ -113,7 +113,8 @@
     @each $k, $v in $bgColors
       .bg-#{$k}
         background-color: $v
-    
+      .text-#{$k}
+        color: $v
     @each $dp in $displays
       .d-#{$dp}
         display: #{$dp}
